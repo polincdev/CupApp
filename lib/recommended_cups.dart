@@ -2,52 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'constants.dart';
+import 'cup.dart';
+import 'cups_view_model.dart';
 import 'details_screen.dart';
+import 'package:provider/provider.dart';
 
 class RecommendedCups  extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    final cupsViewModel=Provider.of<CupsViewModel>(context,listen:false);
+    List<Cup> cupsRecommended=cupsViewModel.cupsRecommended;
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
-        children:[
-          RecommendCupCard(
-              image:"cup_red.png",
-              title:"Cup",
-              type:"Red",
-              price:110,
-               ),
-          RecommendCupCard(
-              image:"cup_blue.png",
-              title:"Cup",
-              type:"Blue",
-              price:90,
-               ),
-          RecommendCupCard(
-              image:"cup_green.png",
-              title:"Cup",
-              type:"Green",
-              price:100,
-              ),
+      child: Row(children:
+      cupsRecommended.map((cup) =>  RecommendCupCard( cup:cup  )).toList()
 
-        ],
       ),
     );
   }
 }
 //
 class RecommendCupCard extends StatelessWidget {
-  final String image, title, type;
-  final int price;
 
+  final Cup cup ;
 
-  const RecommendCupCard( { Key? key,
-    required this.image,
-    required this.title,
-    required this.type,
-    required this.price,
+  const RecommendCupCard( { Key? key , required this.cup }): super(key:key);
 
-  }):super(key:key);
   @override
   Widget build(BuildContext context) {
     Size size= MediaQuery.of(context).size;
@@ -57,8 +38,8 @@ class RecommendCupCard extends StatelessWidget {
         child:Column(
           children: [
           GestureDetector(
-          onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(image:image,title:title, type:type, price:price)));  },
-          child:   Image.asset("assets/images/pngsmall/"+image),
+          onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(image:cup.image,title:cup.title, type:cup.type, price:cup.price)));  },
+          child:   Image.asset("assets/images/pngsmall/"+cup.image),
           ),
             Container(
                 padding: EdgeInsets.all(kDefaultPadding),
@@ -80,15 +61,15 @@ class RecommendCupCard extends StatelessWidget {
                     RichText(
                         text: TextSpan(children: [
                           TextSpan(
-                              text: "$title\n".toUpperCase(),
+                              text: "${cup.title}\n".toUpperCase(),
                               style:Theme.of(context).textTheme.button),
                           TextSpan(
-                              text: "$type".toUpperCase(),
+                              text: "${cup.type}".toUpperCase(),
                               style:TextStyle(color:kPrimaryColor.withOpacity(0.5))),
                         ])
                     ),
                     Spacer(),
-                    Text("$price", style: Theme.of(context).textTheme.button?.copyWith(color: kPrimaryColor)),
+                    Text("${cup.price}", style: Theme.of(context).textTheme.button?.copyWith(color: kPrimaryColor)),
                   ],
                 ),
               ),

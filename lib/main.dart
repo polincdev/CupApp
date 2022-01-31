@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import 'constants.dart';
+import 'cups_view_model.dart';
 import 'home_screen.dart';
 
 void main() {
@@ -22,7 +23,10 @@ class MyApp extends StatelessWidget {
 
         //primarySwatch: Colors.blue,
       ),
-      home:    HomeScreen( ),
+      home:    ChangeNotifierProvider(
+          create: (context) => CupsViewModel(),
+          child: HomeScreen( )
+      ),
     );
   }
 }

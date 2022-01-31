@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'cup.dart';
 import 'details_header.dart';
 
 class DetailsBody extends StatelessWidget{
+  final Cup cup ;
+  const DetailsBody( { Key? key , required this.cup }): super(key:key);
 
-  final String  image,  title, type;
-  final int price;
-
-  const DetailsBody( { Key? key,
-    required this.image,
-    required this.title,
-    required this.type,
-    required this.price,
-
-  }):super(key:key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +17,8 @@ class DetailsBody extends StatelessWidget{
         padding: EdgeInsets.only(top: kDefaultPadding*3),
         child: Column(
             children: [
-              DetailHeader(image:image),
-             DetailInfo(title:title, type:type, price:price),
+              DetailHeader(image:cup.image),
+             DetailInfo(cup:cup),
               SizedBox(height:20),
               Row(
                 children: [
@@ -57,16 +50,8 @@ class DetailsBody extends StatelessWidget{
 
 class DetailInfo  extends StatelessWidget{
 
-  final String   title, type;
-  final int price;
-
-  const DetailInfo( { Key? key,
-     required this.title,
-    required this.type,
-    required this.price,
-
-  }):super(key:key);
-
+  final Cup cup ;
+  const DetailInfo( { Key? key , required this.cup }): super(key:key);
 
 
   @override
@@ -79,18 +64,18 @@ class DetailInfo  extends StatelessWidget{
              text: TextSpan(
                  children: [
                    TextSpan(
-                     text:"$title\n".toUpperCase(),
+                     text:"${cup.title}\n".toUpperCase(),
                      style:Theme.of(context).textTheme.headline4?.copyWith(color: kTextColor,fontWeight: FontWeight.bold),
                    ),
                    TextSpan(
-                     text:"$type\n".toUpperCase(),
+                     text:"${cup.type}\n".toUpperCase(),
                      style:Theme.of(context).textTheme.headline6?.copyWith(color: kPrimaryColor,fontWeight: FontWeight.w200),
                    ),
                  ]
              )
          ),
          Spacer(),
-         Text("$price PLN", style: Theme.of(context).textTheme.headline5?.copyWith(color: kPrimaryColor,fontWeight: FontWeight.w200),),
+         Text("${cup.price} PLN", style: Theme.of(context).textTheme.headline5?.copyWith(color: kPrimaryColor,fontWeight: FontWeight.w200),),
        ],),
    );
   }
