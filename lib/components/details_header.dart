@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../utils/constants.dart';
 
 class DetailHeader  extends StatelessWidget{
 
@@ -22,7 +22,7 @@ class DetailHeader  extends StatelessWidget{
             Expanded(
                 child: Container(
                   //color:Colors.green,
-                  height: size.height*0.7,
+                  height: size.height*0.6,
                   child:   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -30,7 +30,6 @@ class DetailHeader  extends StatelessWidget{
                       DetailIcon(icon:Icons.analytics_outlined, press: (){}),
                       DetailIcon(icon:Icons.view_stream_sharp, press: (){}),
                       DetailIcon(icon:Icons.arrow_circle_down, press: (){}),
-                      DetailIcon(icon:Icons.accessibility_sharp, press: (){}),
 
                     ],
                   ),
@@ -39,7 +38,7 @@ class DetailHeader  extends StatelessWidget{
             ),
             // Container(padding:EdgeInsets.symmetric(vertical: kDefaultPadding),color:Colors.red, height: size.height*0.6, width: size.width*0.8,),
             Container(
-              height: size.height*0.7,
+              height: size.height*0.6,
               width: size.width*0.7,
               decoration: BoxDecoration(
                 color: Colors.black12,
@@ -51,7 +50,7 @@ class DetailHeader  extends StatelessWidget{
                     bottomLeft: Radius.circular(63),
                   ),
                   image: DecorationImage(
-                      image:AssetImage("assets/images/png/"+image),
+                      image:AssetImage("assets/images/png/"+image+".png"),
                       fit: BoxFit.cover,
                       alignment: Alignment.centerLeft
                   )
@@ -81,8 +80,8 @@ class DetailIcon extends StatelessWidget{
             boxShadow:[BoxShadow(offset: Offset(2,5),blurRadius: 20,color: kPrimaryColor)],
 
           ),
-          child:  Icon(icon,size:40),
-          margin:EdgeInsets.only(top: kDefaultPadding, bottom: kDefaultPadding ), height: size.width*0.15, width: size.width*0.15
+          child:  Icon(icon,size:size.width*0.10),
+          margin:EdgeInsets.only(top: kDefaultPadding, bottom: kDefaultPadding ), height: size.width*0.12, width: size.width*0.12
       ),
     );
 

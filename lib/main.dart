@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'constants.dart';
-import 'cups_view_model.dart';
-import 'home_screen.dart';
+import 'utils/constants.dart';
+import 'net/cups_view_model.dart';
+import 'screen/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'net/firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 

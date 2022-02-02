@@ -1,7 +1,9 @@
 
+import 'package:cupapp/net/cups_view_model.dart';
+import 'package:cupapp/screen/search_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'constants.dart';
+import 'package:provider/provider.dart';
+import '../utils/constants.dart';
 class HeaderSearchbar extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class HeaderSearchbar extends StatelessWidget{
         child: Stack(
             children: [
               _buildHeaderBG(size, context),
-             _buildSearchbar(),
+             _buildSearchbar(context),
 
             ]
         ),
@@ -52,7 +54,7 @@ class HeaderSearchbar extends StatelessWidget{
   }
 
 
-  _buildSearchbar() {
+  _buildSearchbar(BuildContext context) {
     return   Positioned(
         left:0,
         right:0,
@@ -72,6 +74,15 @@ class HeaderSearchbar extends StatelessWidget{
           ),
           child: TextField(
             onChanged: (_){},
+            onSubmitted: (searchWord)=>Navigator.push(context, MaterialPageRoute(builder: (_)=>
+
+                ChangeNotifierProvider(
+                    create: (context) => CupsViewModel(),
+                    child: SearchScreen(searchWord: searchWord))
+                ),
+
+
+            ),
             style: TextStyle(fontSize: 20),
             decoration: InputDecoration(
               hintText: "Search",

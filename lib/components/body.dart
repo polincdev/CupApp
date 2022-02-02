@@ -1,10 +1,10 @@
-import 'package:cupapp/constants.dart';
-import 'package:cupapp/recommended_cups.dart';
-import 'package:cupapp/title_with_more_btn.dart';
+import 'package:cupapp/utils/constants.dart';
+import 'package:cupapp/components/recommended_cups.dart';
+import 'package:cupapp/components/title_with_more_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'constants.dart';
+import '../utils/constants.dart';
 import 'featured_cups.dart';
 import 'header_with_searchbox.dart';
 

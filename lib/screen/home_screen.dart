@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'body.dart';
-import 'bottom_bar.dart';
-import 'constants.dart';
+import '../components/body.dart';
+import '../components/bottom_bar.dart';
+import '../utils/constants.dart';
 
 class HomeScreen extends StatelessWidget{
 

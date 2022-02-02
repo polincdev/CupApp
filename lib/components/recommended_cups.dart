@@ -1,24 +1,39 @@
+import 'package:cupapp/net/firebase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
-import 'constants.dart';
-import 'cup.dart';
-import 'cups_view_model.dart';
-import 'details_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../utils/constants.dart';
+import '../dao/cup.dart';
+import '../net/cups_view_model.dart';
+import '../screen/details_screen.dart';
 import 'package:provider/provider.dart';
+
 
 class RecommendedCups  extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    final cupsViewModel=Provider.of<CupsViewModel>(context,listen:false);
-    List<Cup> cupsRecommended=cupsViewModel.cupsRecommended;
-
+  final cupsViewModel=Provider.of<CupsViewModel>(context,listen:false);
+  //  List<Cup> cups=cupsViewModel.cupsRecommended;
+    Size size= MediaQuery.of(context).size;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(children:
-      cupsRecommended.map((cup) =>  RecommendCupCard( cup:cup  )).toList()
+      child: FutureBuilder (
+        future:cupsViewModel.retrieveRecommendedSomeCups() ,
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+               if(snapshot.hasData) {
+                 List<Cup> cups=cupsViewModel.prepareCupsList(snapshot.data as QuerySnapshot<Map<String, dynamic>> );
+                  return Row(children: cups.map((cup) =>   RecommendCupCard(cup: cup)).toList());
+                // return Row(children:  cupsRecommended.map((cup) =>  RecommendCupCard( cup:cup  )).toList()  );
+              }
+              else if(snapshot.hasError)
+                return Container(width:size.width,child: Center(child: Text("No data") ));
+             else
+                return  Container(width:size.width,child: Center(child: CircularProgressIndicator() ));
+              },
+           ),
 
-      ),
+
+
     );
   }
 }
@@ -38,8 +53,8 @@ class RecommendCupCard extends StatelessWidget {
         child:Column(
           children: [
           GestureDetector(
-          onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(image:cup.image,title:cup.title, type:cup.type, price:cup.price)));  },
-          child:   Image.asset("assets/images/pngsmall/"+cup.image),
+          onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(cup:cup)));  },
+          child:   Image.asset("assets/images/pngsmall/"+cup.image+".png"),
           ),
             Container(
                 padding: EdgeInsets.all(kDefaultPadding),
