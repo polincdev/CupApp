@@ -1,4 +1,4 @@
-import 'package:cupapp/net/cups_view_model.dart';
+import 'package:cupapp/data/cups_view_model.dart';
 import 'package:cupapp/screen/details_screen.dart';
 import 'package:cupapp/screen/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -51,8 +51,8 @@ class SearchBody extends StatelessWidget {
            controller: controller,
             onChanged: (_){},
             onSubmitted: (searchWord)=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>
-                ChangeNotifierProvider.value(
-                    value: cupsViewModel,
+                Provider(
+                    create: (context) => CupsViewModel(),
                     child: SearchScreen(searchWord: searchWord))
             ), ),
 

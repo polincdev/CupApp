@@ -1,5 +1,5 @@
 
-import 'package:cupapp/net/cups_view_model.dart';
+import 'package:cupapp/data/cups_view_model.dart';
 import 'package:cupapp/screen/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,11 +27,11 @@ class HeaderSearchbar extends StatelessWidget{
 
     return   Container(
       padding: EdgeInsets.only(
-          left: kDefaultPadding,
+          left: kDefaultPadding ,
           right: kDefaultPadding,
-          bottom: 36+kDefaultPadding
+          bottom: kDefaultPadding/2
       ),
-      height: size.height*0.2-27,
+      height: size.height*0.12,
       decoration: BoxDecoration(
           color: kPrimaryColor,
           borderRadius: BorderRadius.only(
@@ -39,14 +39,28 @@ class HeaderSearchbar extends StatelessWidget{
               bottomRight: Radius.circular(36)
           )),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text("Cup Shop App",
             style:Theme.of(context).textTheme.headline5?.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold),
           ),
-          Spacer(),
-          CircleAvatar(radius: 40,backgroundImage:  AssetImage("assets/images/polinc.png",),)
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Container(
+              width: size.width/4,
+              height: size.width/4,
+             decoration: BoxDecoration(
+                    color: Colors.orange,
+                    shape: BoxShape.circle,
+                    image: DecorationImage(image:  AssetImage("assets/images/polinc.png"))
+
+                ),
+            //  child:Image.asset("assets/images/polinc.png" )
+            ),
+          ),
+          //CircleAvatar(radius: size.width/5,backgroundImage:  AssetImage("assets/images/polinc.png"),)
 
         ],
       ),
@@ -75,14 +89,11 @@ class HeaderSearchbar extends StatelessWidget{
           child: TextField(
             onChanged: (_){},
             onSubmitted: (searchWord)=>Navigator.push(context, MaterialPageRoute(builder: (_)=>
-
-                ChangeNotifierProvider(
+                 Provider(
                     create: (context) => CupsViewModel(),
                     child: SearchScreen(searchWord: searchWord))
                 ),
-
-
-            ),
+             ),
             style: TextStyle(fontSize: 20),
             decoration: InputDecoration(
               hintText: "Search",

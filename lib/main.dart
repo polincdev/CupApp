@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'utils/constants.dart';
-import 'net/cups_view_model.dart';
+import 'data/cups_view_model.dart';
 import 'screen/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'net/firebase_options.dart';
@@ -12,6 +12,16 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MyApp());
+
+  runApp(
+  MultiProvider(
+    providers: [
+       //Provider(create: (_) => CupsViewModel()),
+    ],
+    child: MyApp(),
+  ),);
+
+
 }
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

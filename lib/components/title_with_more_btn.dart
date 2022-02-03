@@ -14,11 +14,11 @@ class TitleWithMoreBtn extends StatelessWidget{
       child: Row(children:[
         TitleSubsection( text:text),
         Spacer(),
-        FlatButton(
+       /* FlatButton(
             shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             color:kPrimaryColor,
             onPressed: press,
-            child: Text("More", style:TextStyle(color: Colors.white)))
+            child: Text("More", style:TextStyle(color: Colors.white)))*/
       ],
       ),
     );

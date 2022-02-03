@@ -1,3 +1,5 @@
+import 'package:cupapp/data/cart_view_model.dart';
+import 'package:cupapp/utils/Utils.dart';
 import 'package:flutter/material.dart';
 import '../utils/constants.dart';
 import '../dao/cup.dart';
@@ -35,7 +37,10 @@ class DetailsBody extends StatelessWidget{
                          child:FlatButton(
                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topRight: Radius.circular(20))),
                           color: kPrimaryColor,
-                          onPressed: () {  },
+                          onPressed: () {
+                           CartViewModel.addCup(cup);
+                           Utils.showSnackbar( context, "Added "+cup.title.toString());
+                           },
                           child: Text("BUY", style: Theme.of(context).textTheme.headline5,),
                          ),
                         ),

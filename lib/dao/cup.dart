@@ -9,15 +9,17 @@ class Cup{
   final String image;
   final bool recommended;
   final bool featured;
-
-  const Cup({
+   String key="";
+     Cup({
     required this.id,
     required this.title,
     required this.type,
     required this.price,
     required this.recommended,
     required this.featured,
-    required this.image});
+    required this.image}){
+      key=id+"="+DateTime.now().toString();
+    }
 
 
  factory Cup.fromJson(Map<String, dynamic> json){

@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../utils/constants.dart';
 import '../dao/cup.dart';
-import '../net/cups_view_model.dart';
+import '../data/cups_view_model.dart';
 import '../screen/details_screen.dart';
 import 'package:provider/provider.dart';
 
