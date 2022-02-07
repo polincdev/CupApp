@@ -13,14 +13,14 @@ void main() async {
   );
   runApp(MyApp());
 
-  runApp(
+ /* runApp(
   MultiProvider(
     providers: [
        //Provider(create: (_) => CupsViewModel()),
     ],
     child: MyApp(),
   ),);
-
+*/
 
 }
 class MyApp extends StatelessWidget {

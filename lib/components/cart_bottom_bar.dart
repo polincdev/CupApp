@@ -35,7 +35,7 @@ class CartBottomBarState extends State{
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(onPressed: (){}, icon: Icon(Icons.home, size:size.width/10 ,)),
+           // Text(onPressed: (){}, icon: Icon(Icons.home, size:size.width/10 )),
             //  IconButton(onPressed: (){}, icon: Icon(Icons.height,size:size.width/10 )),
             IconButton(
                 onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>CartScreen( ) )),
