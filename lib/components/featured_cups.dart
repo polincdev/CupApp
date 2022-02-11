@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../utils/Utils.dart';
 import '../utils/constants.dart';
 import '../dao/cup.dart';
 import '../data/cups_view_model.dart';
@@ -53,11 +54,12 @@ class FeaturedCupCard  extends StatelessWidget{
         margin: EdgeInsets.only(left: kDefaultPadding, top: kDefaultPadding/2, bottom: kDefaultPadding/2),
         width: size.width*0.5,
         height: 100,
-        decoration: BoxDecoration(
+       /* decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(image:AssetImage("assets/images/pngsmall/"+cup.image+".png"),fit: BoxFit.fitWidth)
-        )
-        ,),
+        )*/
+          child:Utils.loadImage(cup.image, size),
+        ),
     );
   }
 }

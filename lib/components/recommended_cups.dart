@@ -8,6 +8,7 @@ import '../data/cups_view_model.dart';
 import '../screen/details_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import '../utils/Utils.dart';
 
 class RecommendedCups  extends StatelessWidget{
   @override
@@ -39,14 +40,7 @@ class RecommendedCups  extends StatelessWidget{
 }
 
 
-Future<String> downloadURLSmallPng(String image)   {
-  print("downloadURLSmallPng="+"assets/images/pngsmall/"+image+".png".toString());
-  Future<String> downloadURL =   firebase_storage.FirebaseStorage.instance
-      .ref("/assets/images/pngsmall/"+image+".png")
-      .getDownloadURL();
 
-   return downloadURL;
-}
 //
 class RecommendCupCard extends StatelessWidget {
 
@@ -65,34 +59,7 @@ class RecommendCupCard extends StatelessWidget {
           GestureDetector(
           onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(cup:cup)));  },
           //child:   Image.asset("assets/images/pngsmall/"+cup.image+".png"),
-            child: FutureBuilder (
-              future:downloadURLSmallPng( cup.image) ,
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                print("IAMG="+snapshot.error.toString());
-
-                if(snapshot.hasData) {
-
-                  return Image.network(snapshot.data as String,fit: BoxFit.cover,loadingBuilder: (  context,   child,  loadingProgress){
-                    if (loadingProgress == null) return child;
-
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null ?
-                        loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 0)
-                            : null,
-                      ),
-                    );
-
-                  },  );
-                }
-
-                else if(snapshot.hasError)
-                  return Container(width:size.width,child: Center(child: Text("No data") ));
-                else
-                  return  Container(width:size.width,child: Center(child: CircularProgressIndicator() ));
-              },
-            ),
-
+            child: Utils.loadImage(cup.image, size),
 
           ),
             Container(
@@ -131,6 +98,8 @@ class RecommendCupCard extends StatelessWidget {
           ],
         ));
   }
+
+
 }
 
 

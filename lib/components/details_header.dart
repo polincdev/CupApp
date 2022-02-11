@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/Utils.dart';
 import '../utils/constants.dart';
 
 class DetailHeader  extends StatelessWidget{
@@ -49,12 +50,14 @@ class DetailHeader  extends StatelessWidget{
                     topLeft: Radius.circular(63),
                     bottomLeft: Radius.circular(63),
                   ),
-                  image: DecorationImage(
+                 /* image: DecorationImage(
                       image:AssetImage("assets/images/png/"+image+".png"),
                       fit: BoxFit.cover,
                       alignment: Alignment.centerLeft
-                  )
+                  )*/
+
               ),
+              child:Utils.loadImage( image, size),
             ),
           ]
       ),
