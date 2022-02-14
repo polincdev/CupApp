@@ -29,13 +29,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Cup App',
       theme: ThemeData(
         scaffoldBackgroundColor: kBackgroundColor,
         primaryColor: kPrimaryColor,
         textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
-
+        inputDecorationTheme: InputDecorationTheme(
+            border:textFieldBorder,
+            enabledBorder:  textFieldBorder,
+          focusedBorder:  textFieldBorder,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: TextButton.styleFrom(
+            backgroundColor: kPrimaryColor,
+            padding: EdgeInsets.all(kDefaultPadding)
+          ),
+        )
         //primarySwatch: Colors.blue,
       ),
       home:    ChangeNotifierProvider(

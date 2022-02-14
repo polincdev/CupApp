@@ -1,4 +1,5 @@
 
+import 'package:cupapp/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/body.dart';
@@ -10,19 +11,21 @@ class HomeScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: Body(),
       bottomNavigationBar: BottomBar(),
 
     );
   }
 
-  _buildAppBar() {
+  _buildAppBar(BuildContext context) {
   return AppBar(
   backgroundColor: kPrimaryColor,
   elevation: 0,
   leading: IconButton(icon: Icon(Icons.window), onPressed: () {  },),
-
+actions: [
+  IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (_)=>RegisterScreen()));}, icon:ClipOval(child: Image.asset("assets/images/polinc.png"))),
+],
   );
   }
 }
