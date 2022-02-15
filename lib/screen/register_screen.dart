@@ -8,6 +8,12 @@ import 'package:form_field_validator/form_field_validator.dart';
 
 class RegisterScreen extends StatelessWidget{
   final  _formKey = GlobalKey<FormState>();
+    String name="", email="", password="", phone="";
+  setName(String name){this.name=name;}
+  setEmail(String email){this.email=email;}
+  setPassword(String password){this.password=password;}
+  setPhone(String phone){this.phone=phone;}
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +36,7 @@ class RegisterScreen extends StatelessWidget{
                    ]
 
                    ,),
-                SignUpForm(formKey: _formKey,),
+                SignUpForm(formKey: _formKey,nameSetter:setName, passwordSetter:setPassword,emailSetter: setEmail,phoneSetter: setPhone),
                 const     SizedBox(height: kDefaultPadding),
                 SizedBox(
                   width: double.infinity,
@@ -41,7 +47,7 @@ class RegisterScreen extends StatelessWidget{
                         if(_formKey.currentState?.validate()??true){
 
                           _formKey.currentState?.save();
-                          print("It works="+ _formKey.currentState?.);
+                          print("It works="+name+"="+email);
                         }
                       },
                       child: Text("Sign up", )
@@ -63,7 +69,11 @@ class RegisterScreen extends StatelessWidget{
 class SignUpForm extends StatelessWidget {
   final  formKey;
   String password="";
-  SignUpForm({required this.formKey});
+  final Function nameSetter;
+  final Function emailSetter;
+  final Function passwordSetter;
+  final Function phoneSetter;
+  SignUpForm({required this.formKey, required this.nameSetter, required this.emailSetter, required this.passwordSetter, required this.phoneSetter});
 
   late String _name, _email, _password, _phone;
 
@@ -78,13 +88,14 @@ class SignUpForm extends StatelessWidget {
             TextFormField(
               decoration: InputDecoration(  hintText: "Test", ),
               validator: RequiredValidator(errorText: 'Insert name'),
+              onSaved: (val)=>nameSetter(val),
             ),
             const SizedBox(height: kDefaultPadding,),
             TextFieldName(title:"Email"),
             TextFormField(
               keyboardType: TextInputType.emailAddress,
               validator: EmailValidator(errorText: 'Insert email'),
-              onSaved: (val)=> _name=val!,
+              onSaved: (val)=> emailSetter(val),
               decoration: InputDecoration(
                   hintText: "Test"
               ),
@@ -92,7 +103,7 @@ class SignUpForm extends StatelessWidget {
             const SizedBox(height: kDefaultPadding,),
             TextFieldName(title:"Phone"),
             TextFormField(
-              onSaved: (val)=> _phone=val!,
+              onSaved: (val)=> phoneSetter(val),
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
                   hintText: "555-555-555"
@@ -101,7 +112,7 @@ class SignUpForm extends StatelessWidget {
             const SizedBox(height: kDefaultPadding,),
             TextFieldName(title:"Password"),
             TextFormField(
-              onSaved: (val)=> _password=val!,
+              onSaved: (val)=> phoneSetter(val),
               onChanged: (val) => password = val,
               obscureText: true,
               decoration: InputDecoration(

@@ -1,6 +1,7 @@
 import 'package:cupapp/screen/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../screen/choice_screen.dart';
 import '../utils/constants.dart';
 
 class BottomBar  extends StatelessWidget{
@@ -27,7 +28,9 @@ class BottomBar  extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(onPressed: (){}, icon: Icon(Icons.home, size:size.width/10 ,)),
-        //  IconButton(onPressed: (){}, icon: Icon(Icons.height,size:size.width/10 )),
+          IconButton(
+              onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>ChoiceScreen( ) )),
+              icon: Icon(Icons.height,size:size.width/10 )),
           IconButton(
              onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>CartScreen( ) )),
              icon: Icon(Icons.add_shopping_cart_outlined,size:size.width/10 )),
