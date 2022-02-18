@@ -43,7 +43,7 @@ class MovableCup  {
     }
     else  if(pos=="center"){
       scale=scale*2;
-      top=(size.height/2-iconWidth/2-kDefaultPadding);
+      top=(size.height/2-iconWidth/2-kDefaultPadding*2);
       left=(size.width/2-iconWidth/2-kDefaultPadding);
 
       index=6;

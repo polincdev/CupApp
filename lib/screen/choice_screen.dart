@@ -12,12 +12,27 @@ class ChoiceScreen extends StatefulWidget{
   
 }
 
-class ChoiceScreenState  extends State<StatefulWidget>{
+class ChoiceScreenState  extends State<StatefulWidget> with SingleTickerProviderStateMixin{
+  late AnimationController _controller;
+  late Animation<Color?> _colorTween;
   int selected=0;
   refresh(int selected){
     setState(() { this.selected=selected;  });
   }
 
+  @override
+  void initState() {
+     super.initState();
+     _controller=AnimationController(vsync: this, duration: Duration(seconds: 3));
+     _controller.repeat(reverse: true);
+      _colorTween= ColorTween(begin: Colors.deepOrange.withOpacity(0.2), end:Colors.deepPurple.withOpacity(0.2)).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+   _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +45,32 @@ class ChoiceScreenState  extends State<StatefulWidget>{
    ),
      body:Padding(
        padding: EdgeInsets.all(kDefaultPadding),
-       child: Stack(
+       child:
+       Stack(
          children: [
+
+
+           Align(
+             alignment: Alignment.center,
+             child: AnimatedBuilder(
+                 animation:_controller,
+                 child: Container(width:200, height:200,decoration: BoxDecoration(   color:_colorTween.value, shape: BoxShape.circle),),
+                 builder:(context, child){  return Transform.scale(scale:1+_controller.value/10, child:child); },
+
+       ),
+           ),
+
+           Align(
+             alignment: Alignment.center,
+             child: AnimatedBuilder(
+               animation:_controller,
+               builder:(context, child){
+                 return   Container(width:300, height:300,decoration: BoxDecoration(   color:_colorTween.value, shape: BoxShape.circle),);
+               },
+
+             ),
+           ),
+
           // AnimatedPositioned(duration: Duration(seconds: 1), left:0, top:0,  bottom: null, child:    Image.asset("assets/images/pngsmall/cup_red.png", width:iconWidth  )),
            MovableCup(refresh,size, iconWidth,"cup_red.png", selected==0?"center":"topLeft").positioned,
          //  AnimatedPositioned(duration: Duration(seconds: 1), left:(size.width/2-iconWidth/2-kDefaultPadding), top:0,  bottom: null,child:Image.asset("assets/images/pngsmall/cup_blue.png", width:iconWidth )),
@@ -49,6 +88,8 @@ class ChoiceScreenState  extends State<StatefulWidget>{
            MovableCup(refresh,size, iconWidth,"mug_blue.png", selected==4?"center":"bottomCenter").positioned,
           // AnimatedPositioned(duration: Duration(seconds: 1), right:0, bottom:0,top:null,child:Image.asset("assets/images/pngsmall/mug_green.png", width:iconWidth )),
            MovableCup(refresh,size, iconWidth,"mug_green.png", selected==5?"center":"bottomRight").positioned,
+
+
          ]
 
 
