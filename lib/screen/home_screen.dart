@@ -1,14 +1,18 @@
 
 import 'package:cupapp/screen/register_screen.dart';
+import 'package:cupapp/screen/three_screen.dart';
+import 'package:cupapp/screen/two_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/body.dart';
 import '../components/bottom_bar.dart';
 import '../utils/constants.dart';
+import 'five_screen.dart';
+import 'four_screen.dart';
 import 'one_screen.dart';
 
 class HomeScreen extends StatelessWidget{
-  var myMenuItems = <String>['Home', 'Profile', 'Setting', 'Privacy', 'Contact'];
+  var myMenuItems = <String>['One', 'Two', 'Three', 'Four', 'Five'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,8 +51,18 @@ actions: [
           case 'One':
           Navigator.push(context, MaterialPageRoute(builder: (_)=>OneScreen()));
           break;
-          case 'Profile':
+          case 'Two':
          Navigator.push(context, MaterialPageRoute(builder: (_)=>TwoScreen()));
+          break;
+            case 'Three':
+               Navigator.push(context, MaterialPageRoute(builder: (_)=>ThreeScreen()));
+              break;
+         case 'Four':
+              Navigator.push(context, MaterialPageRoute(builder: (_)=>FourScreen()));
+              break;
+
+         case 'Five':
+              Navigator.push(context, MaterialPageRoute(builder: (_)=>FiveScreen()));
           break;
           case 'Setting':
           print('Setting clicked');

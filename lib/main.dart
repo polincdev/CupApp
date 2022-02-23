@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Cup App',
       theme: ThemeData(
         scaffoldBackgroundColor: kBackgroundColor,
