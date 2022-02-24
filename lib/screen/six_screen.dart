@@ -45,18 +45,18 @@ class SixScreenState extends State<StatefulWidget> {
                   child:Text("Sleep schedule", style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),),
 
                   )),
-                  Flexible(flex:3,child: Container(width:size.width, color: Colors.red ,
-                  child:    //Initialize the chart widget
+                  Flexible(flex:3,child: Container(width:size.width,
+                  child:
                   SfCartesianChart(
                       primaryXAxis: CategoryAxis(),
                       // Chart title
-                      title: ChartTitle(text: 'Half yearly sales analysis'),
+                      title: ChartTitle(text: 'Sleep schedule'),
                       // Enable legend
                       legend: Legend(isVisible: true),
                       // Enable tooltip
                       tooltipBehavior: TooltipBehavior(enable: true),
                       series: <ChartSeries<_SalesData, String>>[
-                        LineSeries<_SalesData, String>(
+                        BarSeries<_SalesData, String>(
                             dataSource: data,
                             xValueMapper: (_SalesData sales, _) => sales.year,
                             yValueMapper: (_SalesData sales, _) => sales.sales,
