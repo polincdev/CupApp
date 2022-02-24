@@ -48,21 +48,48 @@ class SixScreenState extends State<StatefulWidget> {
                   Flexible(flex:3,child: Container(width:size.width,
                   child:
                   SfCartesianChart(
-                      primaryXAxis: CategoryAxis(),
+
+                    plotAreaBorderWidth: 0,
+                      isTransposed: true,
+                      primaryXAxis: CategoryAxis(
+                        isVisible: false,
+                        minorGridLines: MinorGridLines(width: 0),
+                        minorTickLines: MinorTickLines(width:0),
+                        //Hide the gridlines of x-axis
+                        majorGridLines: MajorGridLines(width: 0),
+                        //Hide the axis line of x-axis
+                        axisLine: AxisLine(width: 0),
+
+                      ),
+
+                      primaryYAxis: CategoryAxis(
+                        minorGridLines: MinorGridLines(width: 0),
+                          minorTickLines: MinorTickLines(width:0),
+                          majorTickLines: MajorTickLines(width:0),
+                          isVisible: false,
+                          //Hide the gridlines of y-axis
+                          majorGridLines: MajorGridLines(width: 0),
+                          //Hide the axis line of y-axis
+                          axisLine: AxisLine(width: 0)
+                      ),
+
                       // Chart title
-                      title: ChartTitle(text: 'Sleep schedule'),
+                    //  title: ChartTitle(text: 'Sleep schedule'),
                       // Enable legend
-                      legend: Legend(isVisible: true),
+                     // legend: Legend(isVisible: true),
                       // Enable tooltip
-                      tooltipBehavior: TooltipBehavior(enable: true),
-                      series: <ChartSeries<_SalesData, String>>[
+                     // tooltipBehavior: TooltipBehavior(enable: true),
+                      series: <BarSeries<_SalesData, String>>[
                         BarSeries<_SalesData, String>(
+
                             dataSource: data,
+                            width: 0.3,
                             xValueMapper: (_SalesData sales, _) => sales.year,
                             yValueMapper: (_SalesData sales, _) => sales.sales,
-                            name: 'Sales',
+                           // name: 'Sales',
                             // Enable data label
-                            dataLabelSettings: DataLabelSettings(isVisible: true))
+                            dataLabelSettings: DataLabelSettings(isVisible: true)
+                        )
                       ]),
                   )),
                   Flexible(flex:1,child: Container(width:size.width, color: Colors.green )),
