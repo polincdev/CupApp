@@ -1,5 +1,6 @@
 
 import 'package:cupapp/screen/register_screen.dart';
+import 'package:cupapp/screen/seven_screen.dart';
 import 'package:cupapp/screen/six_screen.dart';
 import 'package:cupapp/screen/three_screen.dart';
 import 'package:cupapp/screen/two_screen.dart';
@@ -13,7 +14,7 @@ import 'four_screen.dart';
 import 'one_screen.dart';
 
 class HomeScreen extends StatelessWidget{
-  var myMenuItems = <String>['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
+  var myMenuItems = <String>['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,6 +68,9 @@ actions: [
           break;
             case 'Six':
               Navigator.push(context, MaterialPageRoute(builder: (_)=>SixScreen()));
+              break;
+            case 'Seven':
+              Navigator.push(context, MaterialPageRoute(builder: (_)=>SevenScreen()));
               break;
           case 'Setting':
           print('Setting clicked');
