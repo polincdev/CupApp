@@ -9,12 +9,13 @@ import 'package:provider/provider.dart';
 import '../components/body.dart';
 import '../components/bottom_bar.dart';
 import '../utils/constants.dart';
+import 'eight_screen.dart';
 import 'five_screen.dart';
 import 'four_screen.dart';
 import 'one_screen.dart';
 
 class HomeScreen extends StatelessWidget{
-  var myMenuItems = <String>['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven'];
+  var myMenuItems = <String>['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +72,9 @@ actions: [
               break;
             case 'Seven':
               Navigator.push(context, MaterialPageRoute(builder: (_)=>SevenScreen()));
+              break;
+            case 'Eight':
+              Navigator.push(context,MaterialPageRoute(builder: (_)=> EightScreen()));
               break;
           case 'Setting':
           print('Setting clicked');
