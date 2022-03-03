@@ -1,9 +1,14 @@
 //ignore_for_file: prefer_const_constructors
 import 'dart:async';
+import 'dart:io';
+import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:path_provider/path_provider.dart';
+
 import '../components/recommended_cups.dart';
 class Utils{
   static void showSnackbar(BuildContext context, String text){
@@ -58,6 +63,20 @@ return date.toUtc();
   }
 
 
+  static Future<File> getFileFromAssets(String path) async {
+    final byteData = await rootBundle.load('assets/$path');
+
+    final file = File('${(await getTemporaryDirectory()).path}/$path');
+    await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+    return file;
+  }
+
+  static Future<ByteBuffer> getFileDataFromAssets(String path) async {
+    final byteData = await rootBundle.load(path);
+
+    return byteData.buffer;
+  }
 
 
 }
