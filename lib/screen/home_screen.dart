@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../components/body.dart';
 import '../components/bottom_bar.dart';
 import '../utils/constants.dart';
-import 'eight_screen.dart';
+
 import 'five_screen.dart';
 import 'four_screen.dart';
 import 'one_screen.dart';
@@ -73,9 +73,7 @@ actions: [
             case 'Seven':
               Navigator.push(context, MaterialPageRoute(builder: (_)=>SevenScreen()));
               break;
-            case 'Eight':
-              Navigator.push(context,MaterialPageRoute(builder: (_)=> EightScreen()));
-              break;
+
           case 'Setting':
           print('Setting clicked');
           break;
